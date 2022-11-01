@@ -2,6 +2,11 @@ import math
 
 from django.core.paginator import Paginator
 
+# python -c
+# "import string as s;from random import SystemRandom as
+# sr;print(''.join(sr().choices(s.ascii_letters +
+# s.punctuation, k=64)))"
+
 
 def make_pagination_range(
     page_range,
@@ -10,7 +15,7 @@ def make_pagination_range(
 ):
     middle_range = math.ceil(qty_pages / 2)
     start_range = current_page - middle_range
-    stop_range = qty_pages + middle_range
+    stop_range = current_page + middle_range
     total_pages = len(page_range)
 
     start_range_offset = abs(start_range) if start_range < 0 else 0
@@ -24,7 +29,7 @@ def make_pagination_range(
 
     pagination = page_range[start_range:stop_range]
     return {
-        'paginations': pagination,
+        'pagination': pagination,
         'page_range': page_range,
         'qty_pages': qty_pages,
         'current_page': current_page,
@@ -32,13 +37,13 @@ def make_pagination_range(
         'start_range': start_range,
         'stop_range': stop_range,
         'first_page_out_of_range': current_page > middle_range,
-        'last_page_out_of_range': stop_range < total_pages
+        'last_page_out_of_range': stop_range < total_pages,
     }
 
 
 def make_pagination(request, queryset, per_page, qty_pages=4):
     try:
-        current_page = request.GET.get('page', 1)
+        current_page = int(request.GET.get('page', 1))
     except ValueError:
         current_page = 1
 

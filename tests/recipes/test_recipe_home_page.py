@@ -33,6 +33,7 @@ class RecipeHomePageFunctionalTest(RecipeBaseFunctionalTest):
         )
 
         # Clica neste input e digita o termo de busca
+
         # para encontrar a receita o título desejado
         search_input.send_keys(title_needed)
         search_input.send_keys(Keys.ENTER)
@@ -45,9 +46,18 @@ class RecipeHomePageFunctionalTest(RecipeBaseFunctionalTest):
 
     @patch('recipes.views.PER_PAGE', new=2)
     def test_recipe_home_page_pagination(self):
-        recipes = self.make_recipe_in_batch()
 
         # Usuario abre a pagina
         self.browser.get(self.live_server_url)
 
-        self.sleep(10)
+        # ve que tem uma paginacao e clica na pag 2
+        page2 = self.borwser.find_element(
+            By.XPATH,
+            '//a[@aria-label="Go to page 2"'
+        )
+        page2.click()
+
+        self.assertEqual(
+            len(self.browser.find_elements(By.CLASS_NAME, 'recipe')),
+            2
+        )
