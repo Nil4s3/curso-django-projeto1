@@ -20,7 +20,7 @@ class RecipeModelTest(RecipeTestBase):
             preparation_time_unit='Minutos',
             servings=5,
             servings_unit='Porções',
-            preparation_steps='Recipe Preparation Steps',
+            preparation_step='Recipe Preparation Step',
         )
         recipe.full_clean()
         recipe.save()
@@ -40,7 +40,7 @@ class RecipeModelTest(RecipeTestBase):
     def test_recipe_preparation_steps_is_html_is_false_by_default(self):
         recipe = self.make_recipe_no_defaults()
         self.assertFalse(
-            recipe.preparation_steps_is_html,
+            recipe.preparation_step_is_html,
             msg='Recipe preparation_steps_is_html is not False',
         )
 

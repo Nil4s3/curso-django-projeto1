@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from recipes.models import Category, Recipe, User
 
 
@@ -33,8 +34,8 @@ class RecipeMixin:
         preparation_time_unit='Minutos',
         servings=5,
         servings_unit='Porções',
-        preparation_steps='Recipe Preparation Steps',
-        preparation_steps_is_html=False,
+        preparation_step='Recipe Preparation Steps',
+        preparation_step_is_html=False,
         is_published=True,
     ):
         if category_data is None:
@@ -53,8 +54,8 @@ class RecipeMixin:
             preparation_time_unit=preparation_time_unit,
             servings=servings,
             servings_unit=servings_unit,
-            preparation_steps=preparation_steps,
-            preparation_steps_is_html=preparation_steps_is_html,
+            preparation_step=preparation_step,
+            preparation_step_is_html=preparation_step_is_html,
             is_published=is_published,
         )
 
