@@ -5,7 +5,7 @@ from authors.models import Profile
 
 
 class ProfileView(TemplateView):
-    template_name = 'authors/profile/profile.html'
+    template_name = 'authors/pages/profile.html'
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
